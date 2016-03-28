@@ -1,0 +1,56 @@
+<div class="col-sm-2">
+<div ng-repeat="clue in question.clues">
+  <div class="">
+    <button type="button" data-toggle="modal" data-target="#{{clue.id}}" class="btn btn-primary btn-lg {{clue.id}}">$ {{ clue.value }}</button>
+    <button data-toggle="modal" data-target="#{{clue.id}}" type="button" class="btn btn-primary btn-lg {{clue.id}}" style="display: none"></button>
+   </div>
+
+   <div class="modal fade" tabindex="-1" id="{{clue.id}}" role="dialog">
+     <div class="modal-dialog">
+       <div class="modal-content">
+         <div class="modal-header">
+           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+           <h5 class="modal-title">{{question.title}} for ${{clue.value}}</h5>
+         </div>
+         <div class="modal-body {{clue.id}}">
+           <img src="https://m.popkey.co/ddcb15/Q8wLQ.gif" alt="" />
+           <p>{{clue.question}}?</p>
+         </div>
+
+          <div class="modal-body {{clue.id}}" style="display:none" >
+             <img src="http://stream1.gifsoup.com/view/625326/celebrity-jeopardy-o.gif" alt="" />
+            <p class="what">
+            What Is: {{clue.answer}}
+            </p>
+
+
+         </div>
+
+         <div class="modal-footer {{clue.id}}">
+           <form role="form-group" ng-submit="addScore(userInput,clue.answer,clue.value)">
+             <input type="text" name="" ng-model="userInput" class="form-control" placeholder="What is"/>
+
+          <button ng-click="shit(clue.id)" type="submit" class="btn btn-success btn-md " btn-toggle="modal-body">Submit</button>
+
+
+          </div>
+
+          <div class="modal-footer {{clue.id}}" style="display:none">
+            <form role="form-group" ng-submit="addScore(userInput,clue.answer,clue.value)">
+              <input type="text" name="" ng-model="userInput" class="form-control" />
+
+           <button ng-click="disableBtn(clue.id)" type="button" class="btn btn-danger btn-md" btn-toggle="modal-body">Close</button>
+
+
+           </div>
+
+
+
+           </form>
+
+
+         </div>
+       </div><!-- /.modal-content -->
+     </div><!-- /.modal-dialog -->
+   </div><!-- /.modal -->
+</div>
