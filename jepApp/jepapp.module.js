@@ -2,20 +2,18 @@ var angular = require('angular');
 var angularRoute = require('angular-route');
 
 angular
-  .module('jep',[
-    'ngRoute',
-    'jepApp'
-  ])
+  .module('jepApp',['ngRoute'])
   .config(function($routeProvider) {
-
     $routeProvider
-      .when('/',{
-        templateUrl: "main.html",
+      .when('/jepapp',{
+        templateUrl: "../jepApp/templates/index.html",
         controller: "HomeController"
+      })
+      .when('/question',{
+        templateUrl: "../jepApp/templates/questions.html",
+        controller: "QuestionController"
       })
       .otherwise({
          redirectTo: '/404'
       })
   })
-
-  require("./jepApp");

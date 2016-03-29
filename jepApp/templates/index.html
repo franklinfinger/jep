@@ -1,0 +1,21 @@
+<nav class="navbar navbar-default">
+    <h1 class="navbar-text">Jeopardy</h1>
+</nav>
+
+<div class="row score">
+  <div class="col-md-12">
+  score: {{score}}
+</div>
+</div>
+<div class="row">
+  <div class="col-md-2" ng-repeat="category in categories">
+    <div class="well">
+    <p>{{ category.data.title }}</p>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-2" ng-repeat="category in categories" class="">
+    <jeopardy-reader question=category.data></jeopardy-reader>
+  </div>
+</div>

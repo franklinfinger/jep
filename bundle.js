@@ -3,35 +3,25 @@ var angular = require('angular');
 var angularRoute = require('angular-route');
 
 angular
-  .module('jep',['ngRoute'])
+  .module('jep',[
+    'ngRoute',
+    'jepApp'
+  ])
   .config(function($routeProvider) {
+
     $routeProvider
       .when('/',{
-        templateUrl: "templates/index.html",
+        templateUrl: "main.html",
         controller: "HomeController"
       })
-      .when('/question',{
-        templateUrl: "templates/questions.html",
-        controller: "QuestionController"
-      })
-      // .when('/404',{
-      //   template: '<h1> You messed up, loser </h1>',
-      //   controller: 'WangController'
-      // })
       .otherwise({
          redirectTo: '/404'
       })
   })
 
-  require('./controllers/home.controller');
-  require('./controllers/question.controller');
-  require('./services/api.service');
-  require('./services/cacheengine.service')
-  // require('./services/tiny.services');
-  // require('./services/cacheEngineService');
-  require('./directives/directive');
+  require("./jepApp");
 
-},{"./controllers/home.controller":2,"./controllers/question.controller":3,"./directives/directive":4,"./services/api.service":10,"./services/cacheengine.service":11,"angular":8,"angular-route":6}],2:[function(require,module,exports){
+},{"./jepApp":4,"angular":11,"angular-route":9}],2:[function(require,module,exports){
 var _ = require('underscore');
 
 angular
@@ -57,14 +47,14 @@ angular
       })
     });
 
-},{"underscore":9}],3:[function(require,module,exports){
-
-},{}],4:[function(require,module,exports){
+},{"underscore":12}],3:[function(require,module,exports){
 angular
   .module('jep')
   .directive('jeopardyReader', function(){
+  // .directive('jeopardyReader', function(){
     return {
-      templateUrl: '../templates/jeopardy-reader.html',
+      templateUrl: '../../jepApp/templates/jeopardy-reader.html',
+      // templateUrl: '../../jepApp/templates/jeopardy-reader.html',
       restrict: 'E',
       scope: {
         question: '='
@@ -97,7 +87,66 @@ angular
     }
   })
 
-},{}],5:[function(require,module,exports){
+},{}],4:[function(require,module,exports){
+require('./jepapp.module');
+require('./controllers/home.controller');
+require('./services/api.service');
+require('./services/cacheengine.service')
+require('./directives/directive');
+
+},{"./controllers/home.controller":2,"./directives/directive":3,"./jepapp.module":5,"./services/api.service":6,"./services/cacheengine.service":7}],5:[function(require,module,exports){
+var angular = require('angular');
+var angularRoute = require('angular-route');
+
+angular
+  .module('jepApp',['ngRoute'])
+  .config(function($routeProvider) {
+    $routeProvider
+      .when('/jepapp',{
+        templateUrl: "../jepApp/templates/index.html",
+        controller: "HomeController"
+      })
+      .when('/question',{
+        templateUrl: "../jepApp/templates/questions.html",
+        controller: "QuestionController"
+      })
+      .otherwise({
+         redirectTo: '/404'
+      })
+  })
+
+},{"angular":11,"angular-route":9}],6:[function(require,module,exports){
+var _ = require('underscore');
+angular
+  .module('jep')
+  .service('ApiService', function($http, $q,$cacheFactory){
+
+    var url = 'http://jservice.io/api/category?id=';
+
+    var urlArr = [url, url, url, url, url, url];
+    function getCategories(){
+      var promises = [];
+    urlArr.forEach(function(el){
+      var rando = Math.floor(Math.random() * 1200);
+      var promise = $http.get(el + rando);
+      promises.push(promise);
+    })
+    return $q.all(promises);
+  }
+    return {
+      getCategories: getCategories
+
+    }
+  })
+
+},{"underscore":12}],7:[function(require,module,exports){
+angular
+  .module('jep')
+  .service('CacheEngine',function($cacheFactory) {
+    return $cacheFactory('jeopardyAPI');
+});
+
+},{}],8:[function(require,module,exports){
 /**
  * @license AngularJS v1.5.2
  * (c) 2010-2016 Google, Inc. http://angularjs.org
@@ -1121,11 +1170,11 @@ function ngViewFillContentFactory($compile, $controller, $route) {
 
 })(window, window.angular);
 
-},{}],6:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 require('./angular-route');
 module.exports = 'ngRoute';
 
-},{"./angular-route":5}],7:[function(require,module,exports){
+},{"./angular-route":8}],10:[function(require,module,exports){
 /**
  * @license AngularJS v1.5.2
  * (c) 2010-2016 Google, Inc. http://angularjs.org
@@ -31706,11 +31755,11 @@ $provide.value("$locale", {
 })(window, document);
 
 !window.angular.$$csp().noInlineStyle && window.angular.element(document.head).prepend('<style type="text/css">@charset "UTF-8";[ng\\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}</style>');
-},{}],8:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 require('./angular');
 module.exports = angular;
 
-},{"./angular":7}],9:[function(require,module,exports){
+},{"./angular":10}],12:[function(require,module,exports){
 //     Underscore.js 1.8.3
 //     http://underscorejs.org
 //     (c) 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
@@ -33259,36 +33308,5 @@ module.exports = angular;
     });
   }
 }.call(this));
-
-},{}],10:[function(require,module,exports){
-var _ = require('underscore');
-angular
-  .module('jep')
-  .service('ApiService', function($http, $q,$cacheFactory){
-
-    var url = 'http://jservice.io/api/category?id=';
-
-    var urlArr = [url, url, url, url, url, url];
-    function getCategories(){
-      var promises = [];
-    urlArr.forEach(function(el){
-      var rando = Math.floor(Math.random() * 1200);
-      var promise = $http.get(el + rando);
-      promises.push(promise);
-    })
-    return $q.all(promises);
-  }
-    return {
-      getCategories: getCategories
-
-    }
-  })
-
-},{"underscore":9}],11:[function(require,module,exports){
-angular
-  .module('jep')
-  .service('CacheEngine',function($cacheFactory) {
-    return $cacheFactory('jeopardyAPI');
-});
 
 },{}]},{},[1]);

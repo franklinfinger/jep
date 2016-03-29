@@ -1,8 +1,10 @@
 angular
   .module('jep')
   .directive('jeopardyReader', function(){
+  // .directive('jeopardyReader', function(){
     return {
-      templateUrl: '../templates/jeopardy-reader.html',
+      templateUrl: '../../jepApp/templates/jeopardy-reader.html',
+      // templateUrl: '../../jepApp/templates/jeopardy-reader.html',
       restrict: 'E',
       scope: {
         question: '='

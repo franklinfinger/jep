@@ -1,8 +1,8 @@
 <div class="col-sm-2">
 <div ng-repeat="clue in question.clues">
   <div class="">
-    <button type="button" data-toggle="modal" data-target="#{{clue.id}}" class="btn btn-primary btn-lg {{clue.id}}">$ {{ clue.value }}</button>
-    <button data-toggle="modal" data-target="#{{clue.id}}" type="button" class="btn btn-primary btn-lg {{clue.id}}" style="display: none"></button>
+    <button type="button" data-toggle="modal" data-target="#{{clue.id}}" class="btn ff btn-primary btn-lg {{clue.id}}">$ {{ clue.value }}</button>
+    <button data-toggle="modal" data-target="#{{clue.id}}" type="button" class="btn ff btn-primary btn-lg {{clue.id}}" style="display: none"></button>
    </div>
 
    <div class="modal fade" tabindex="-1" id="{{clue.id}}" role="dialog">
