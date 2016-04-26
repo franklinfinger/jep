@@ -1,6 +1,5 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 var angular = require('angular');
-var angularRoute = require('angular-route');
 
 angular
   .module('jep',[
@@ -19,33 +18,42 @@ angular
       })
   })
 
+
   require("./jepApp");
+  require('angular-route');
 
 },{"./jepApp":4,"angular":11,"angular-route":9}],2:[function(require,module,exports){
 var _ = require('underscore');
 
 angular
   .module('jep')
-  .controller('HomeController', function($scope, $http, $q, $location, $rootScope, ApiService, CacheEngine) {
-    $rootScope.score = 0;
+  .controller('HomeController', HomeController);
     // ApiService.getCategories().then(function(data){
     //   $scope.categories = data;
     // })
+
+
+  HomeController.$inject = ["$scope", "$http", "$q", "$location","$rootScope", "ApiService"];
+
+
+
+
+  function HomeController($scope, $http, $q, $location, $rootScope, ApiService) {
+    $rootScope.score = 0;
+    var vm = this;
 //Thanks Brandon Hare for providing the genius needed to complete the following
     ApiService.getCategories(6)
       .then(function(categories){
         console.log(categories);
-        $scope.categories = categories;
-        $scope.categories.forEach(function(el){
-          if(el.data.clues_count > 5 ){
-            el.data.clues = _.first((el.data.clues), 5);
-          }
+        vm.categories = categories;
+        vm.categories.forEach(function(el){
           for(i=0;i<5;i++){
             el.data.clues[i].value = 200 * (i + 1);
+            
           }
-        })
       })
-    });
+    })
+  }
 
 },{"underscore":12}],3:[function(require,module,exports){
 angular
@@ -70,6 +78,13 @@ angular
             $rootScope.score -= val;
           }
         };
+        var beepOne = $("audio-jep")[0];
+        $(".navbar h1")
+        .mouseenter(function() {
+        beepOne.play();
+        console.log("why", beepOne)
+        });
+
         $scope.disableBtn = function(id){
           $('button.'+id).prop('disabled', true);
           $('button.'+id).toggle();
@@ -77,8 +92,6 @@ angular
 
             // $(".modal-footer " +id).toggle('hide');
             // $(".modal-footer " +id).toggle('show');
-
-
         }
         $scope.shit = function(id){
           $("div." + id).toggle();
@@ -104,7 +117,8 @@ angular
     $routeProvider
       .when('/jepapp',{
         templateUrl: "../jepApp/templates/index.html",
-        controller: "HomeController"
+        controller: "HomeController as HomeCtrl",
+        controllerAs: "HomeCtrl"
       })
       .when('/question',{
         templateUrl: "../jepApp/templates/questions.html",

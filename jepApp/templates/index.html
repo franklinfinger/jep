@@ -1,5 +1,8 @@
 <nav class="navbar navbar-default">
     <h1 class="navbar-text">Jeopardy</h1>
+    <audio class="audio-jep">
+    	<source src="trebeck.mp3"></source>
+    </audio>
 </nav>
 
 <div class="row score">
@@ -7,15 +10,18 @@
   score: {{score}}
 </div>
 </div>
+
+
 <div class="row">
-  <div class="col-md-2" ng-repeat="category in categories">
+  <div class="col-md-2" ng-repeat="category in HomeCtrl.categories">
     <div class="well">
     <p>{{ category.data.title }}</p>
+
     </div>
   </div>
 </div>
 <div class="row">
-  <div class="col-md-2" ng-repeat="category in categories" class="">
+  <div class="col-md-2" ng-repeat="category in HomeCtrl.categories">
     <jeopardy-reader question=category.data></jeopardy-reader>
   </div>
 </div>

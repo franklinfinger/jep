@@ -20,6 +20,13 @@ angular
             $rootScope.score -= val;
           }
         };
+        var beepOne = $("audio-jep")[0];
+        $(".navbar h1")
+        .mouseenter(function() {
+        beepOne.play();
+        console.log("why", beepOne)
+        });
+
         $scope.disableBtn = function(id){
           $('button.'+id).prop('disabled', true);
           $('button.'+id).toggle();
@@ -27,8 +34,6 @@ angular
 
             // $(".modal-footer " +id).toggle('hide');
             // $(".modal-footer " +id).toggle('show');
-
-
         }
         $scope.shit = function(id){
           $("div." + id).toggle();

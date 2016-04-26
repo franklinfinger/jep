@@ -7,7 +7,8 @@ angular
     $routeProvider
       .when('/jepapp',{
         templateUrl: "../jepApp/templates/index.html",
-        controller: "HomeController"
+        controller: "HomeController as HomeCtrl",
+        controllerAs: "HomeCtrl"
       })
       .when('/question',{
         templateUrl: "../jepApp/templates/questions.html",
