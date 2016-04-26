@@ -1,3 +1,8 @@
+.splash {
+  background-image: url("http://www.youthdownloads.com/wp-content/uploads/2015/01/Jeopardy-Logo.jpg") no-repeat center center fixed;
+  background-size: cover;
+}
+
 .ff {
   margin-bottom: 10px;
   margin-left: -10px;
