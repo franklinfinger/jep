@@ -4,7 +4,6 @@ angular
   // .directive('jeopardyReader', function(){
     return {
       templateUrl: './jepApp/templates/jeopardy-reader.html',
-      // templateUrl: '../../jepApp/templates/jeopardy-reader.html',
       restrict: 'E',
       scope: {
         question: '='
@@ -32,8 +31,6 @@ angular
           $('button.'+id).toggle();
           $('#' +id).modal("hide")
 
-            // $(".modal-footer " +id).toggle('hide');
-            // $(".modal-footer " +id).toggle('show');
         }
         $scope.shit = function(id){
           $("div." + id).toggle();
