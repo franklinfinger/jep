@@ -3,7 +3,7 @@ angular
   .directive('jeopardyReader', function(){
   // .directive('jeopardyReader', function(){
     return {
-      templateUrl: '../../jepApp/templates/jeopardy-reader.html',
+      templateUrl: './jepApp/templates/jeopardy-reader.html',
       // templateUrl: '../../jepApp/templates/jeopardy-reader.html',
       restrict: 'E',
       scope: {
