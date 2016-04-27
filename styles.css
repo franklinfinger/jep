@@ -1,5 +1,5 @@
 .container-splash {
-  background-image: ("http://www.youthdownloads.com/wp-content/uploads/2015/01/Jeopardy-Logo.jpg");
+  background-image: url(img/jeopardy-Logo.jpg);
   background-size: cover;
 }
 
