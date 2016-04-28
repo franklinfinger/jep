@@ -1,3 +1,10 @@
+body {
+   background-image: url(jeopardy-Logo.jpg);
+   background-size: cover;
+   background-position-y: -170px;
+ }
+
+
 .ff {
   margin-bottom: 10px;
   margin-left: -10px;
