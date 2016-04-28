@@ -1,7 +1,9 @@
-/*.wrapper-splash-splash {
-  background-image: url(img/jeopardy-Logo.jpg);
-  background-size: cover;
-}*/
+ body {
+   background-image: url(jeopardy-Logo.jpg);
+   background-size: cover;
+   background-position-y: -170px;
+ }
+
 
 .ff {
   margin-bottom: 10px;
